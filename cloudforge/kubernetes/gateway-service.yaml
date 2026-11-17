@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloudforge-gateway
+  labels:
+    app: cloudforge
+    component: gateway
+  namespace: cloudforge
+spec:
+  type: LoadBalancer
+  selector:
+    app: cloudforge
+    component: gateway
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8000
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 8000

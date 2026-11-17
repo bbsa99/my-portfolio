@@ -1,0 +1,5 @@
+﻿curl: C:\WINDOWS\system32\curl.exe
+partial MB: 1698
+--- expected size via curl HEAD ---
+x-goog-stored-content-length: 1934624561
+Content-Length: 1934624561

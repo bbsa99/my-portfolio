@@ -1,0 +1,114 @@
+# CloudForge - Helm Chart Values
+# Global configuration for all resources
+global:
+  namespace: cloudforge
+  nameOverride: cloudforge
+  fullnameOverride: cloudforge
+
+# Image registry configuration
+image:
+  registry: ghcr.io
+  repository: ghcr.io/cloudforge/cloudforge
+  tag: "latest"
+
+# Service ports
+service:
+  gatewayPort: 8000
+  catalogPort: 8001
+  ordersPort: 8002
+
+# Replica counts
+replicas:
+  gateway: 2
+  catalog: 2
+  orders: 2
+
+# Resource limits
+resources:
+  limits:
+    memory: "512Mi"
+    cpu: "750m"
+  requests:
+    memory: "256Mi"
+    cpu: "250m"
+
+# Gateway configuration
+gateway:
+  enabled: true
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 50
+    targetMemoryUtilizationPercentage: 70
+  serviceType: LoadBalancer
+  ingress:
+    enabled: true
+    className: nginx
+    annotations: {}
+    hosts:
+      - host: api.cloudforge.local
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls: []
+    # - secretName: cloudforge-gateway-tls
+    #   hosts:
+    #     - api.cloudforge.local
+
+# Catalog configuration
+catalog:
+  enabled: true
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 60
+    targetMemoryUtilizationPercentage: 75
+  serviceType: ClusterIP
+
+# Orders configuration
+orders:
+  enabled: true
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 60
+    targetMemoryUtilizationPercentage: 75
+  serviceType: ClusterIP
+
+# Database configuration
+postgres:
+  enabled: true
+  existingSecret: cloudforge-gateway-secret
+  persistence:
+    enabled: true
+    size: 20Gi
+    storageClass: gp2
+
+# Redis configuration
+redis:
+  enabled: true
+  existingSecret: cloudforge-gateway-secret
+  persistence:
+    enabled: true
+    size: 100Mi
+    storageClass: redis
+
+# Monitoring configuration
+monitoring:
+  enabled: true
+  prometheus:
+    enabled: true
+    servicePort: 9090
+  grafana:
+    enabled: true
+    adminPassword: admin
+    serviceType: LoadBalancer
+
+# Feature flags
+features:
+  authEnabled: true
+  rateLimitingEnabled: true
+  metricsEnabled: true

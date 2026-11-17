@@ -1,0 +1,6 @@
+﻿time: 10/14/2026 14:24:36
+zip exists: True
+zip MB: 69
+flutter.bat: False
+dl log tail:
+start 10/14/2026 14:23:02

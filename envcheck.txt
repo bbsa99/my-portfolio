@@ -1,0 +1,9 @@
+--- package managers ---
+winget: True
+choco: True
+git: True
+--- Visual Studio (needed for Windows desktop) ---
+vswhere exists: False
+--- Chrome (for web run) ---
+Chrome: False
+

@@ -1,0 +1,6 @@
+﻿time: 10/14/2026 18:09:50
+partial MB: 1790
+flutter.bat: False
+=== markers ===
+dl2 start 10/14/2026 18:06:47 ; expectedMB=1845
+attempt=1 currentMB=1698

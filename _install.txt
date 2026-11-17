@@ -1,0 +1,11 @@
+﻿starting flutter install (shallow clone stable) at 10/14/2026 14:17:06
+git : Cloning into 'C:\Users\amanu\flutter_sdk'...
+At line:1 char:206
++ ... oding utf8; git clone --depth 1 -b stable 
+https://github.com/flutter/ ...
++                 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Cloning into 'C...flutter_s 
+   dk'...:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 

@@ -1,0 +1,133 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "cloudforge.fullname" . }}-gateway
+  namespace: {{ .Values.global.namespace }}
+  labels:
+    {{- include "cloudforge.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicas.gateway }}
+  selector:
+    matchLabels:
+      app: {{ include "cloudforge.name" . }}-gateway
+      component: gateway
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: {{ include "cloudforge.name" . }}-gateway
+        component: gateway
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "{{ .Values.service.gatewayPort }}"
+        prometheus.io/path: "/api/v1/metrics"
+    spec:
+      containers:
+        - name: gateway
+          image: "{{ .Values.image.repository }}-gateway:{{ .Values.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: {{ .Values.service.gatewayPort }}
+              name: http
+          env:
+            - name: CF_ENV
+              value: "development"
+            - name: JWT_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "cloudforge.fullname" . }}-secret
+                  key: JWT_SECRET_KEY
+            - name: POSTGRES_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "cloudforge.fullname" . }}-secret
+                  key: POSTGRES_DSN
+            - name: REDIS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "cloudforge.fullname" . }}-secret
+                  key: REDIS_URL
+            - name: CATALOG_SERVICE_URL
+              value: "http://{{ include "cloudforge.fullname" . }}-catalog:{{ .Values.service.catalogPort }}"
+            - name: ORDERS_SERVICE_URL
+              value: "http://{{ include "cloudforge.fullname" . }}-orders:{{ .Values.service.ordersPort }}"
+            - name: APP_NAME
+              value: "{{ .Values.global.nameOverride }}"
+            - name: DEBUG
+              value: "true"
+            - name: OTEL_SERVICE_NAME
+              value: "{{ include "cloudforge.name" . }}-gateway"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://{{ include "cloudforge.fullname" . }}-otel-collector:4317"
+            - name: OTEL_EXPORTER_OTLP_PROTOCOL
+              value: "http/protobuf"
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "750m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+          livenessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /api/v1/health
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 5
+            failureThreshold: 12
+          securityContext:
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+          # capabilities:
+          #   drop:
+          #   - ALL
+      {{- with .Values.autoscaling.gateway }}
+      autoscaler:
+        apiVersion: autoscaling/v2
+        kind: HorizontalPodAutoscaler
+        metadata:
+          name: {{ include "cloudforge.fullname" . }}-hpa
+          namespace: {{ .Values.global.namespace }}
+        spec:
+          scaleTargetRef:
+            apiVersion: apps/v1
+            kind: Deployment
+            name: {{ include "cloudforge.fullname" . }}-gateway
+          minReplicas: {{ .minReplicas }}
+          maxReplicas: {{ .maxReplicas }}
+          metrics:
+            - type: Resource
+              resource:
+                name: cpu
+                target:
+                  type: Utilization
+                  averageUtilization: {{ .targetCPUUtilizationPercentage }}
+            - type: Resource
+              resource:
+                name: memory
+                target:
+                  type: Utilization
+                  averageUtilization: {{ .targetMemoryUtilizationPercentage }}
+      {{- end }}

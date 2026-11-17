@@ -1,0 +1,12 @@
+﻿drives:
+
+Name Root         Used
+---- ----         ----
+C    C:\  208261984256
+
+
+
+contents of C:\Users\amanu\flutter (top+1):
+C:\Users\amanu\flutter  [0]
+
+search flutter.bat / dart.exe (C:\Users depth 6):

@@ -1,0 +1,42 @@
+=== .html files ===
+Count: 0
+
+
+=== All file extensions present ===
+
+Count Name            
+----- ----            
+   35 .png            
+   29 .dart           
+   13 .xml            
+   12 .java           
+   10 .webp           
+    5 .h              
+    4 .plist          
+    3 .yaml           
+    3 .gitignore      
+    3 .gradle         
+    2 .json           
+    2 .xcworkspacedata
+    2 .xcsettings     
+    2 .storyboard     
+    2 .strings        
+    2 .arb            
+    2 .properties     
+    2 .md             
+    2 .swift          
+    2 .xcconfig       
+    1 .pbxproj        
+    1 .xcscheme       
+    1 .metadata       
+    1 .env            
+    1 .entitlements   
+    1 .xcstrings      
+    1 .m              
+    1                 
+    1 .a              
+    1 .last_build_id  
+    1 .kt             
+
+
+

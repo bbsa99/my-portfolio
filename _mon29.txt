@@ -1,0 +1,29 @@
+﻿time: 10/14/2026 14:59:17
+zip exists: True
+zip MB: 1438
+flutter.bat: False
+=== _dl.txt ===
+start 10/14/2026 14:23:02
+=== _stage2 tail ===
+stage2 start 10/14/2026 14:37:38
+waiting for sdk... 60s; zipMB=632
+waiting for sdk... 120s; zipMB=671
+waiting for sdk... 180s; zipMB=713
+waiting for sdk... 240s; zipMB=744
+waiting for sdk... 300s; zipMB=786
+waiting for sdk... 360s; zipMB=830
+waiting for sdk... 420s; zipMB=874
+waiting for sdk... 480s; zipMB=916
+waiting for sdk... 540s; zipMB=956
+waiting for sdk... 600s; zipMB=995
+waiting for sdk... 660s; zipMB=1033
+waiting for sdk... 720s; zipMB=1076
+waiting for sdk... 780s; zipMB=1118
+waiting for sdk... 840s; zipMB=1154
+waiting for sdk... 900s; zipMB=1189
+waiting for sdk... 960s; zipMB=1217
+waiting for sdk... 1020s; zipMB=1253
+waiting for sdk... 1080s; zipMB=1292
+waiting for sdk... 1140s; zipMB=1333
+waiting for sdk... 1200s; zipMB=1370
+waiting for sdk... 1260s; zipMB=1412

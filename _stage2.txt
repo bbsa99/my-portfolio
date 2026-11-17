@@ -1,0 +1,265 @@
+﻿stage2 start 10/14/2026 14:37:38
+waiting for sdk... 60s; zipMB=632
+waiting for sdk... 120s; zipMB=671
+waiting for sdk... 180s; zipMB=713
+waiting for sdk... 240s; zipMB=744
+waiting for sdk... 300s; zipMB=786
+waiting for sdk... 360s; zipMB=830
+waiting for sdk... 420s; zipMB=874
+waiting for sdk... 480s; zipMB=916
+waiting for sdk... 540s; zipMB=956
+waiting for sdk... 600s; zipMB=995
+waiting for sdk... 660s; zipMB=1033
+waiting for sdk... 720s; zipMB=1076
+waiting for sdk... 780s; zipMB=1118
+waiting for sdk... 840s; zipMB=1154
+waiting for sdk... 900s; zipMB=1189
+waiting for sdk... 960s; zipMB=1217
+waiting for sdk... 1020s; zipMB=1253
+waiting for sdk... 1080s; zipMB=1292
+waiting for sdk... 1140s; zipMB=1333
+waiting for sdk... 1200s; zipMB=1370
+waiting for sdk... 1260s; zipMB=1412
+waiting for sdk... 1320s; zipMB=1454
+waiting for sdk... 1380s; zipMB=1493
+waiting for sdk... 1440s; zipMB=1531
+waiting for sdk... 1500s; zipMB=1572
+waiting for sdk... 1560s; zipMB=1610
+waiting for sdk... 1620s; zipMB=1649
+waiting for sdk... 1680s; zipMB=1692
+waiting for sdk... 1740s; zipMB=1698
+waiting for sdk... 1800s; zipMB=1698
+waiting for sdk... 1860s; zipMB=1698
+waiting for sdk... 1920s; zipMB=1722
+waiting for sdk... 1980s; zipMB=1751
+waiting for sdk... 2040s; zipMB=1775
+waiting for sdk... 2100s; zipMB=1806
+waiting for sdk... 2160s; zipMB=1831
+waiting for sdk... 2220s; zipMB=1845
+sdk ready 10/14/2026 18:13:07
+--- flutter --version (first run downloads Dart engine) ---
+flutter : Building flutter tool... 
+At C:\Users\amanu\.cline\data\workspaces\chat\_stage2_runner.ps1:15 char:1
++ flutter --version 2>&1 | Out-File $log -Append -Encoding utf8
++ ~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Building flutter tool... :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+The system cannot find the path specified.
+Running pub upgrade... 
+Found no `pubspec.yaml` file in `C:\Users\amanu\.cline\data\workspaces\chat` or parent directories
+Error (66): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (9 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Found no `pubspec.yaml` file in `C:\Users\amanu\.cline\data\workspaces\chat` or parent directories
+Error (66): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (8 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Found no `pubspec.yaml` file in `C:\Users\amanu\.cline\data\workspaces\chat` or parent directories
+Error (66): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (7 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Found no `pubspec.yaml` file in `C:\Users\amanu\.cline\data\workspaces\chat` or parent directories
+Error (66): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (6 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Found no `pubspec.yaml` file in `C:\Users\amanu\.cline\data\workspaces\chat` or parent directories
+Error (66): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (5 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Found no `pubspec.yaml` file in `C:\Users\amanu\.cline\data\workspaces\chat` or parent directories
+Error (66): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (4 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Found no `pubspec.yaml` file in `C:\Users\amanu\.cline\data\workspaces\chat` or parent directories
+Error (66): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (3 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Found no `pubspec.yaml` file in `C:\Users\amanu\.cline\data\workspaces\chat` or parent directories
+Error (66): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (2 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Found no `pubspec.yaml` file in `C:\Users\amanu\.cline\data\workspaces\chat` or parent directories
+Error (66): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (1 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Error: 'pub upgrade' still failing after 10 tries. 
+Flutter 3.47.7 ΓÇó channel stable ΓÇó https://github.com/flutter/flutter.git
+Framework ΓÇó revision abaf9c5237 (6 days ago) ΓÇó 2026-10-08 09:51:21 -0700
+Engine ΓÇó hash d8a2d6c768c334d53e16277f837970ffa1e2de81 (revision deb287481e) (6 days ago) ΓÇó 2026-10-07 17:09:12.000Z
+Tools ΓÇó Dart 3.13.5 ΓÇó DevTools 2.60.0
+The Flutter CLI developer tool uses Google Analytics to report usage and diagnostic
+data along with package dependencies, and crash reporting to send basic crash
+reports. This data is used to help improve the Dart platform, Flutter framework,
+and related tools.
+
+Telemetry is not sent on the very first run. To disable reporting of telemetry,
+run this terminal command:
+
+    flutter --disable-analytics
+
+If you opt out of telemetry, an opt-out event will be sent, and then no further
+information will be sent. This data is collected in accordance with the Google
+Privacy Policy (https://policies.google.com/privacy).
+
+--- config enable-web ---
+flutter : Building flutter tool... 
+At C:\Users\amanu\.cline\data\workspaces\chat\_stage2_runner.ps1:17 char:1
++ flutter config --enable-web --no-analytics 2>&1 | Out-File $log -Appe ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Building flutter tool... :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+The system cannot find the path specified.
+Running pub upgrade... 
+Found no `pubspec.yaml` file in `C:\Users\amanu\.cline\data\workspaces\chat` or parent directories
+Error (66): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (9 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Found no `pubspec.yaml` file in `C:\Users\amanu\.cline\data\workspaces\chat` or parent directories
+Error (66): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (8 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Found no `pubspec.yaml` file in `C:\Users\amanu\.cline\data\workspaces\chat` or parent directories
+Error (66): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (7 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Found no `pubspec.yaml` file in `C:\Users\amanu\.cline\data\workspaces\chat` or parent directories
+Error (66): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (6 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Found no `pubspec.yaml` file in `C:\Users\amanu\.cline\data\workspaces\chat` or parent directories
+Error (66): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (5 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Found no `pubspec.yaml` file in `C:\Users\amanu\.cline\data\workspaces\chat` or parent directories
+Error (66): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (4 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Found no `pubspec.yaml` file in `C:\Users\amanu\.cline\data\workspaces\chat` or parent directories
+Error (66): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (3 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Found no `pubspec.yaml` file in `C:\Users\amanu\.cline\data\workspaces\chat` or parent directories
+Error (66): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (2 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Found no `pubspec.yaml` file in `C:\Users\amanu\.cline\data\workspaces\chat` or parent directories
+Error (66): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (1 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Error: 'pub upgrade' still failing after 10 tries. 
+Flutter SDK installation appears corrupted: expected to find the directory 
+C:\Users\amanu\flutter\packages\flutter_tools but it does not exist! Please go to https://flutter.dev/setup for 
+instructions on how to re-install Flutter.
+--- pub get ---
+flutter : Building flutter tool... 
+At C:\Users\amanu\.cline\data\workspaces\chat\_stage2_runner.ps1:20 char:1
++ flutter pub get 2>&1 | Out-File $log -Append -Encoding utf8
++ ~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Building flutter tool... :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+The system cannot find the path specified.
+Running pub upgrade... 
+Resolving dependencies...
+Because taximeter depends on flutter_test from sdk which doesn't exist (the Flutter SDK is not available), version 
+solving failed.
+
+Flutter users should use `flutter pub` instead of `dart pub`.
+Error (69): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (9 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Resolving dependencies...
+Because taximeter depends on flutter_test from sdk which doesn't exist (the Flutter SDK is not available), version 
+solving failed.
+
+Flutter users should use `flutter pub` instead of `dart pub`.
+Error (69): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (8 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Resolving dependencies...
+Because taximeter depends on flutter_test from sdk which doesn't exist (the Flutter SDK is not available), version 
+solving failed.
+
+Flutter users should use `flutter pub` instead of `dart pub`.
+Error (69): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (7 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Resolving dependencies...
+Because taximeter depends on flutter_test from sdk which doesn't exist (the Flutter SDK is not available), version 
+solving failed.
+
+Flutter users should use `flutter pub` instead of `dart pub`.
+Error (69): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (6 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Resolving dependencies...
+Because taximeter depends on flutter_test from sdk which doesn't exist (the Flutter SDK is not available), version 
+solving failed.
+
+Flutter users should use `flutter pub` instead of `dart pub`.
+Error (69): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (5 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Resolving dependencies...
+Because taximeter depends on flutter_test from sdk which doesn't exist (the Flutter SDK is not available), version 
+solving failed.
+
+Flutter users should use `flutter pub` instead of `dart pub`.
+Error (69): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (4 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Resolving dependencies...
+Because taximeter depends on flutter_test from sdk which doesn't exist (the Flutter SDK is not available), version 
+solving failed.
+
+Flutter users should use `flutter pub` instead of `dart pub`.
+Error (69): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (3 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Resolving dependencies...
+Because taximeter depends on flutter_test from sdk which doesn't exist (the Flutter SDK is not available), version 
+solving failed.
+
+Flutter users should use `flutter pub` instead of `dart pub`.
+Error (69): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (2 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Running pub upgrade... 
+Resolving dependencies...
+Because taximeter depends on flutter_test from sdk which doesn't exist (the Flutter SDK is not available), version 
+solving failed.
+
+Flutter users should use `flutter pub` instead of `dart pub`.
+Error (69): Unable to 'pub upgrade' flutter tool. Retrying in five seconds... (1 tries left) 
+
+Waiting for 5 seconds, press CTRL+C to quit ...43210
+Error: 'pub upgrade' still failing after 10 tries. 
+Flutter SDK installation appears corrupted: expected to find the directory 
+C:\Users\amanu\flutter\packages\flutter_tools but it does not exist! Please go to https://flutter.dev/setup for 
+instructions on how to re-install Flutter.
+stage2 done 10/14/2026 18:16:02

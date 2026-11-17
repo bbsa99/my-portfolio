@@ -1,0 +1,8 @@
+firebase_options.dart: False
+google-services.json (Android): False
+GoogleService-Info.plist (iOS): False
+--- web folder? ---
+web/index.html: False
+--- windows folder? ---
+windows/ present: False
+

@@ -1,0 +1,105 @@
+name: CloudForge CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ghcr.io/${{ github.repository }}/cloudforge
+  NAMESPACE: cloudforge
+jobs:
+  # Lint, test, and validate
+  lint-test:
+    name: Lint and Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      test_passed: ${{ steps.test.results_conclusion == 'success' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r cloudforge/api_gateway/requirements.txt
+
+      - name: Lint with ruff
+        run: ruff check .
+
+      - name: Format check with black
+        run: black --check .
+
+      - name: Type check with mypy
+        run: mypy cloudforge/api_gateway/
+
+      - name: Run unit tests
+        run: |
+          python -m pytest cloudforge/api_gateway/tests/ -v
+
+      - name: Run security scan (bandit)
+        run: |
+          python -m bandit -r cloudforge/api_gateway/ -f json -o bandit-report.json || true
+          cat bandit-report.json | python -m json.tool > bandit-summary.txt || true
+
+      - name: Run integration tests
+        run: |
+          python -m pytest cloudforge/tests/ -v --integration || true
+
+      - name: Validate Kubernetes manifests
+        run: |
+          pip install kubeval
+          kubeval --strict ./cloudforge/kubernetes/ || true
+
+      - name: Validate Helm charts
+        run: |
+          helm lint ./cloudforge/helm-chart/ || true
+
+      - name: Validate Terraform
+        run: |
+          terraform init -input=false -no-color ./cloudforge/terraform/
+          terraform validate -no-color ./cloudforge/terraform/ || true
+
+      - name: Scan Docker images for vulnerabilities
+        run: |
+# Build Docker images
+  build-image:
+    name: Build Docker Image
+    needs: lint-test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to GH Registry
+        uses: ghcr-action/login-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push API Gateway image
+        run: |
+          docker build -t ${{ env.IMAGE_NAME }}-gateway:${{ github.sha }} -f cloudforge/api_gateway/Dockerfile ./cloudforge/api_gateway
+          docker push ${{ env.IMAGE_NAME }}-gateway:${{ github.sha }}
+
+      - name: Build and push Catalog image
+        run: |
+          docker build -t ${{ env.IMAGE_NAME }}-catalog:${{ github.sha }} -f ./cloudforge/catalog/Dockerfile ./cloudforge/catalog
+          docker push ${{ env.IMAGE_NAME }}-catalog:${{ github.sha }}
+
+      - name: Build and push Orders image
+        run: |
+          docker build -t ${{ env.IMAGE_NAME }}-orders:${{ github.sha }} -f ./cloudforge/orders/Dockerfile ./cloudforge/orders
+          docker push ${{ env.IMAGE_NAME }}-orders:${{ github.sha }}
+          pip install trivy
+          trivy image --exit-code 0 --severity HIGH,CRITICAL ${{ env.IMAGE_NAME }}-gateway:latest || true

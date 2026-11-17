@@ -1,0 +1,10 @@
+﻿test-path results:
+C:\Users\amanu\flutter\bin\flutter.bat => False
+C:\Users\amanu\flutter\flutter\bin\flutter.bat => False
+C:\flutter\bin\flutter.bat => False
+C:\src\flutter\bin\flutter.bat => False
+C:\tools\flutter\bin\flutter.bat => False
+C:\dev\flutter\bin\flutter.bat => False
+D:\flutter\bin\flutter.bat => False
+where flutter:
+where dart:

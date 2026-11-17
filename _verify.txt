@@ -1,0 +1,3 @@
+﻿CLEAN: no dart:io or Platform.is in lib/
+zip MB: 462
+flutter.bat: False

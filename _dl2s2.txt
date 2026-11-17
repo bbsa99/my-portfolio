@@ -1,0 +1,4 @@
+﻿time: 10/14/2026 18:08:21
+partial MB: 1751
+flutter.bat: False
+=== _dl2 tail (non-progress lines) ===

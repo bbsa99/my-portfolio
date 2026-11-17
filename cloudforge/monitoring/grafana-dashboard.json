@@ -1,0 +1,129 @@
+{
+  "dashboard": {
+    "id": null,
+    "uid": "cloudforge",
+    "title": "CloudForge Monitoring",
+    "timezone": "browser",
+    "templates": [],
+    "refresh": "30s",
+    "schemaVersion": 38,
+    "version": 1,
+    "tags": ["cloudforge", "microservices"],
+    "panels": [
+      {
+        "type": "stat",
+        "title": "Gateway Requests Total",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "rate(cloudforge_gateway_requests_total[1m])",
+            "legendFormat": "{{method}} {{endpoint}}"
+          }
+        ],
+        "gridPos": { "x": 0, "y": 0, "w": 12, "h": 4 },
+        "options": {
+          "reduceOptions": { "values": false, "calcs": [ "lastNotNull" ] },
+          "field": "value",
+          "format": "short",
+          "unit": "requests"
+        }
+      },
+      {
+        "type": "stat",
+        "title": "Gateway Error Rate",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "rate(cloudforge_gateway_errors_total[1m])",
+            "legendFormat": "{{type}}"
+          }
+        ],
+        "gridPos": { "x": 12, "y": 0, "w": 12, "h": 4 },
+        "options": {
+          "reduceOptions": { "values": false, "calcs": [ "lastNotNull" ] },
+          "field": "value",
+          "format": "short",
+          "unit": "errors"
+        }
+      },
+      {
+        "type": "stat",
+        "title": "Catalog Service Requests",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "rate(cloudforge_catalog_requests_total[1m])",
+            "legendFormat": "{{method}}"
+          }
+        ],
+        "gridPos": { "x": 0, "y": 4, "w": 12, "h": 4 },
+        "options": {
+          "reduceOptions": { "values": false, "calcs": [ "lastNotNull" ] },
+          "field": "value",
+          "format": "short",
+          "unit": "requests"
+        }
+      },
+      {
+        "type": "stat",
+        "title": "Orders Service Requests",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "rate(cloudforge_orders_requests_total[1m])",
+            "legendFormat": "{{method}}"
+          }
+        ],
+        "gridPos": { "x": 12, "y": 4, "w": 12, "h": 4 },
+        "options": {
+          "reduceOptions": { "values": false, "calcs": [ "lastNotNull" ] },
+          "field": "value",
+          "format": "short",
+          "unit": "requests"
+        }
+      },
+      {
+        "type": "graph",
+        "title": "Service Response Times",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, sum(rate(cloudforge_response_duration_seconds_bucket[5m])) by (le))",
+            "legendFormat": "95th percentile"
+          },
+          {
+            "expr": "histogram_quantile(0.99, sum(rate(cloudforge_response_duration_seconds_bucket[5m])) by (le))",
+            "legendFormat": "99th percentile"
+          }
+        ],
+        "gridPos": { "x": 0, "y": 8, "w": 24, "h": 8 },
+        "lines": true,
+        "linewidth": 2,
+        "fill": 0,
+        "tooltip": { "shared": true, "sort": 0 },
+        "transformations": []
+      },
+      {
+        "type": "table",
+        "title": "Active Requests",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "cloudforge_gateway_active_requests",
+            "legendFormat": ""
+          }
+        ],
+        "gridPos": { "x": 0, "y": 16, "w": 12, "h": 4 },
+        "options": {
+          "showHeader": true,
+          "columns": [{ "text": "Service", "sortable": true }, { "text": "Active", "sortable": true }]
+        }
+      }
+    ],
+    "annotations": {
+      "list": []
+    }
+  },
+  "overwrite": false,
+  "folder": "CloudForge"
+}

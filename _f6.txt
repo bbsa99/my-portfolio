@@ -1,0 +1,15 @@
+﻿flutter.bat candidates:
+C:\Users\amanu\fvm\default\bin\flutter.bat => False
+C:\Users\amanu\scoop\apps\flutter\current\bin\flutter.bat => False
+C:\ProgramData\chocolatey\bin\flutter.bat => False
+C:\Program Files\Android\Android Studio\plugins\flutter\bin\flutter.bat => False
+C:\Users\amanu\AppData\Local\Android\Sdk => False
+C:\Users\amanu\AppData\Local\Pub\Cache\bin\dart.bat => False
+C:\Users\amanu\development\flutter\bin\flutter.bat => False
+C:\Users\amanu\Documents\flutter\bin\flutter.bat => False
+C:\Users\amanu\Desktop\flutter\bin\flutter.bat => False
+C:\Users\amanu\Downloads\flutter\bin\flutter.bat => False
+project .dart_tool / build dirs:
+C:\Users\amanu\.cline\data\workspaces\chat\yonas project\TaxiMeter_Flutter.dart_tool => False
+pubspec.lock => False
+windows dir => False

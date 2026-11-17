@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloudforge-postgres
+  labels:
+    app: cloudforge
+    component: postgres
+spec:
+  type: ClusterIP
+  selector:
+    app: cloudforge
+    component: postgres
+  ports:
+    - name: postgres
+      protocol: TCP
+      port: 5432
+      targetPort: 5432

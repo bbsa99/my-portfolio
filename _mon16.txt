@@ -1,0 +1,19 @@
+﻿time: 10/14/2026 14:49:14
+zip exists: True
+zip MB: 1059
+flutter.bat: False
+=== _dl.txt ===
+start 10/14/2026 14:23:02
+=== _stage2 tail ===
+stage2 start 10/14/2026 14:37:38
+waiting for sdk... 60s; zipMB=632
+waiting for sdk... 120s; zipMB=671
+waiting for sdk... 180s; zipMB=713
+waiting for sdk... 240s; zipMB=744
+waiting for sdk... 300s; zipMB=786
+waiting for sdk... 360s; zipMB=830
+waiting for sdk... 420s; zipMB=874
+waiting for sdk... 480s; zipMB=916
+waiting for sdk... 540s; zipMB=956
+waiting for sdk... 600s; zipMB=995
+waiting for sdk... 660s; zipMB=1033

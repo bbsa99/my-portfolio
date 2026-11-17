@@ -1,0 +1,13 @@
+--- search whole project for firebase_options.dart ---
+(NONE FOUND)
+
+--- search for google-services.json / GoogleService-Info.plist ---
+(NONE FOUND)
+\n--- platform folders present ---
+android: True
+ios: True
+web: False
+windows: False
+linux: False
+macos: False
+

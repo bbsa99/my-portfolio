@@ -1,0 +1,5 @@
+﻿--- VS Code user settings.json (flutter/dart/sdk lines) ---
+
+--- cmd dir of nested flutter\flutter (first 40) ---
+--- cmd dir of C:\Users\amanu\flutter (first 40) ---
+flutter

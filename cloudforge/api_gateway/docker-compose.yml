@@ -1,0 +1,143 @@
+# CloudForge API Gateway - Docker Compose
+# Local development environment with all dependent services
+
+version: "3.9"
+
+services:
+
+  # API Gateway Service
+  gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cloudforge-gateway
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - CF_ENV=development
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - POSTGRES_DSN=${POSTGRES_DSN}
+      - REDIS_URL=${REDIS_URL}
+      - CATALOG_SERVICE_URL=http://catalog:8001
+      - ORDERS_SERVICE_URL=http://orders:8002
+    volumes:
+      - .:/app
+    depends_on:
+      postgres:
+      - redis:
+    networks:
+      - cloudforge-network
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: cloudforge-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: cloudforge
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: cloudforge
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - cloudforge-network
+
+  # Redis for caching and rate limiting
+  redis:
+    image: redis:7-alpine
+    container_name: cloudforge-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6379:6379"
+    networks:
+      - cloudforge-network
+
+  # Catalog Service (mock backend)
+  catalog:
+    image: ghcr.io/yanatan16/simple-fastapi:latest
+    container_name: cloudforge-catalog
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgresql://cloudforge:password@postgres:5432/cloudforge
+    ports:
+      - "8001:8000"
+    depends_on:
+      - postgres
+    networks:
+      - cloudforge-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Orders Service (mock backend)
+  orders:
+    image: ghcr.io/yanatan16/simple-fastapi:latest
+    container_name: cloudforge-orders
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgresql://cloudforge:password@postgres:5432/cloudforge
+    ports:
+      - "8002:8000"
+    depends_on:
+      - postgres
+    networks:
+      - cloudforge-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Prometheus for metrics scraping
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: cloudforge-prometheus
+    restart: unless-stopped
+    volumes:
+      - ./monitoring/prometheus:/etc/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - cloudforge-network
+
+  # Grafana for dashboards
+  grafana:
+    image: grafana/grafana:latest
+    container_name: cloudforge-grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./monitoring/grafana:/etc/grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    networks:
+      - cloudforge-network
+
+  # OpenTelemetry Collector (if tracing is enabled)
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    container_name: cloudforge-otel-collector
+    restart: unless-stopped
+    command: ["--config=/etc/otel/collector-config.yaml"]
+    volumes:
+      - ./monitoring/otel:/etc/otel
+    ports:
+      - "4317:4317"
+    networks:
+      - cloudforge-network
+
+volumes:
+  postgres_data:
+
+networks:
+  cloudforge-network:
+    driver: bridge
+    internal: false

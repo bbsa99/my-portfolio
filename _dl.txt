@@ -1,0 +1,2 @@
+﻿start 10/14/2026 14:23:02
+DOWNLOAD FAILED: Unable to read data from the transport connection: An established connection was aborted by the software in your host machine.

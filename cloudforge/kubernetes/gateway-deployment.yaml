@@ -1,0 +1,112 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudforge-gateway
+  labels:
+    app: cloudforge
+    component: gateway
+  namespace: cloudforge
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cloudforge
+      component: gateway
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: cloudforge
+        component: gateway
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+        prometheus.io/path: "/api/v1/metrics"
+    spec:
+      serviceAccountName: cloudforge-gateway
+      containers:
+        - name: gateway
+          image: cloudforge-gateway:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+              name: http
+          env:
+            - name: CF_ENV
+              value: "development"
+            - name: JWT_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: cloudforge-gateway-secret
+                  key: JWT_SECRET_KEY
+            - name: POSTGRES_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: cloudforge-gateway-secret
+                  key: POSTGRES_DSN
+            - name: REDIS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: cloudforge-gateway-secret
+                  key: REDIS_URL
+            - name: CATALOG_SERVICE_URL
+              value: "http://cloudforge-catalog:8001"
+            - name: ORDERS_SERVICE_URL
+              value: "http://cloudforge-orders:8002"
+            - name: APP_NAME
+              value: "CloudForge-API-Gateway"
+            - name: DEBUG
+              value: "true"
+            - name: OTEL_SERVICE_NAME
+              value: "cloudforge-gateway"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://cloudforge-otel-collector:4317"
+            - name: OTEL_EXPORTER_OTLP_PROTOCOL
+              value: "http/protobuf"
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "750m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+          livenessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /api/v1/health
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 5
+            failureThreshold: 12
+          # Security context
+          securityContext:
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+          # Capabilities
+          # capabilities:
+          #   drop:
+          #   - ALL
+      # Node selectors for affinity/anti-affinity
+      # nodeSelector:
+      #   env: production

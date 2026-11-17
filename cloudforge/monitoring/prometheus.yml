@@ -1,0 +1,31 @@
+# Prometheus Configuration for CloudForge
+global:
+  scrape_interval: 15s
+  evaluation_interval: 30s
+
+scrape_configs:
+  - job_name: "cloudforge-gateway"
+    static_configs:
+      - targets: ["cloudforge-gateway:8000"]
+    metrics_path: "/api/v1/metrics"
+    scheme: "http"
+
+  - job_name: "cloudforge-catalog"
+    static_configs:
+      - targets: ["cloudforge-catalog:8001"]
+    metrics_path: "/api/v1/metrics"
+    scheme: "http"
+
+  - job_name: "cloudforge-orders"
+    static_configs:
+      - targets: ["cloudforge-orders:8002"]
+    metrics_path: "/api/v1/metrics"
+    scheme: "http"
+
+  - job_name: "cloudredis"
+    static_configs:
+      - targets: ["cloudforge-redis:6379"]
+
+  - job_name: "cloudforge-postgres"
+    static_configs:
+      - targets: ["cloudforge-postgres:5432"]

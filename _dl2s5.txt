@@ -1,0 +1,7 @@
+﻿time: 10/14/2026 18:10:32
+partial MB: 1812
+flutter.bat: False
+flutter dir exists: True
+=== markers ===
+dl2 start 10/14/2026 18:06:47 ; expectedMB=1845
+attempt=1 currentMB=1698

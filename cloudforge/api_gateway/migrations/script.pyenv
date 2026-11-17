@@ -1,0 +1,15 @@
+"""Script Python Environment for Alembic."""
+import sys
+import os
+
+# Add the api_gateway directory to the path
+sys.path.insert(0, os.path.dirname(__file__) + "/../../../..")
+
+from core.config import Settings
+
+settings = Settings()
+
+# This is needed so that Alembic can import the models
+# when running from the migrations directory
+print(f"Using database: {settings.postgres_dsn}")
+

@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudforge-postgres
+  labels:
+    app: cloudforge
+    component: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudforge
+      component: postgres
+  template:
+    metadata:
+      labels:
+        app: cloudforge
+        component: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15-alpine
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: cloudforge-gateway-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: cloudforge-gateway-secret
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_DB
+              value: "cloudforge"
+          ports:
+            - containerPort: 5432
+              name: postgres
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+          livenessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - "$(POSTGRES_USER)"
+                - "-d"
+                - "$(POSTGRES_DB)"
+            initialDelaySeconds: 30
+            periodicity: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - "$(POSTGRES_USER)"
+                - "-d"
+                - "$(POSTGRES_DB)"
+            initialDelaySeconds: 5
+            periodicity: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+      volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: cloudforge-postgres-pvc

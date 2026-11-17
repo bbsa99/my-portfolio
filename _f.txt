@@ -1,0 +1,7 @@
+﻿candidates:
+C:\Users\amanu\flutter\flutter\bin missing
+C:\Users\amanu\flutter\bin missing
+C:\flutter\bin missing
+C:\src\flutter\bin missing
+C:\tools\flutter\bin missing
+C:\dev\flutter\bin missing

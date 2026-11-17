@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloudforge-orders
+  labels:
+    app: cloudforge
+    component: orders
+  namespace: cloudforge
+spec:
+  type: ClusterIP
+  selector:
+    app: cloudforge
+    component: orders
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8002
+      targetPort: 8002

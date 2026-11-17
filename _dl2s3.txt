@@ -1,0 +1,8 @@
+﻿time: 10/14/2026 18:09:04
+partial MB: 1766
+flutter.bat: False
+=== markers ===
+dl2 start 10/14/2026 18:06:47 ; expectedMB=1845
+attempt=1 currentMB=1698
++   & curl.exe -L -C - --retry 8 --retry-delay 5 --retry-all-errors --r ...
+    + FullyQualifiedErrorId : NativeCommandError

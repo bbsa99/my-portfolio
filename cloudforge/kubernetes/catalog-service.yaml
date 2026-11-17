@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloudforge-catalog
+  labels:
+    app: cloudforge
+    component: catalog
+  namespace: cloudforge
+spec:
+  type: ClusterIP
+  selector:
+    app: cloudforge
+    component: catalog
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8001
+      targetPort: 8001

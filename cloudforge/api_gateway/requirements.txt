@@ -1,0 +1,52 @@
+# CloudForge API Gateway - Requirements
+
+# FastAPI and web framework
+fastapi>=0.104.1
+uvicorn[standard]>=0.30.4
+
+# Pydantic for settings and validation
+pydantic>=2.7.0
+pydantic-settings>=2.2.0
+
+# HTTP client for service-to-service communication
+httpx[http2]>=0.27.0
+
+# Security
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+
+# Middleware
+starlette>=0.43.0
+
+# Environment configuration
+python-dotenv>=1.0.0
+
+# Logging
+structlog>=4.3.0
+
+# Metrics and monitoring
+prometheus-fastapi-instrumentator>=7.1.0
+
+# Rate limiting
+slowapi>=0.35.0
+
+# Tracing (OpenTelemetry)
+opentelemetry-api>=1.22.0
+opentelemetry-sdk>=1.22.0
+opentelemetry-instrumentation-fastapi>=0.46b0
+
+# Database drivers
+asyncpg>=0.29.0
+redis>=5.0.0
+
+# JSON serialization
+pydantic[dotenv]>=2.7.0
+
+# Testing (development)
+pytest>=8.2.0
+httpx[pyasync]>=0.27.0
+
+# Development tools
+black>=24.3.0
+ruff>=0.5.0
+mypy>=1.8.0

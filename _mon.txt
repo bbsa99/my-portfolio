@@ -1,0 +1,8 @@
+﻿time: 10/14/2026 14:38:29
+zip exists: True
+zip MB: 626
+flutter.bat: False
+=== _dl.txt ===
+start 10/14/2026 14:23:02
+=== _stage2.txt ===
+stage2 start 10/14/2026 14:37:38

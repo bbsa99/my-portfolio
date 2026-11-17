@@ -1,0 +1,74 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: cloudforge-otel-collector
+  labels:
+    app: cloudforge
+    component: otel-collector
+  namespace: cloudforge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudforge
+      component: otel-collector
+  template:
+    metadata:
+      labels:
+        app: cloudforge
+        component: otel-collector
+    spec:
+      containers:
+        - name: otel-collector
+          image: otel/opentelemetry-collector-contrib:latest
+          args: ["--config=/etc/otel/collector-config.yaml"]
+          volumeMounts:
+            - name: otel-config
+              mountPath: /etc/otel
+          ports:
+            - containerPort: 4317
+              name: otlp
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+      volumes:
+        - name: otel-config
+          configMap:
+            name: otel-collector-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otel-collector-config
+  namespace: cloudforge
+data:
+  processor: |
+    extensions:
+      batch:
+        timeout: 10s
+    
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+          http:
+    
+    exporters:
+      logging:
+        loglevel: debug
+      otlp:
+        endpoint: "otel-collector:4317"
+        tls:
+          insecure: true
+    
+    service:
+      extensions: [batch]
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: [batch]
+          exporters: [logging, otlp]
